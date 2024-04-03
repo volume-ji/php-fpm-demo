@@ -2,12 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: <your nginxingress classname>
     kubernetes.io/ingress.rule-mix: "false"
     nginx.ingress.kubernetes.io/backend-protocol: FCGI
     nginx.ingress.kubernetes.io/fastcgi-index: index.php
     nginx.ingress.kubernetes.io/fastcgi-params-configmap: fastcgi-params
-  name: php
+  name: php-fpm
   namespace: default
 spec:
   rules:

@@ -5,7 +5,7 @@ RUN apt-get update -y && \
     apt-get install -y zip git openssl zlib1g-dev libpng-dev libmcrypt-dev  libicu-dev
 
 # install php ext
-RUN docker-php-ext-install gd  intl pdo pdo_mysql mbstring
+RUN docker-php-ext-install gd  intl pdo
 
 RUN docker-php-ext-configure intl
 
@@ -16,7 +16,7 @@ RUN curl -sS https://getcomposer.org/installer | \
 
 
 WORKDIR /project
-COPY ../public /project
+COPY ./ /project
 
 RUN echo '{\
     "require": {\

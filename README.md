@@ -7,15 +7,26 @@ It is a demo of php-fpm deployed on a tke cluster in nginxingress
 
 ```
 cd dockerfile
-docker build -t <registry>/<repository>:<tag> .
+docker build -t <registry>/<repository>:<tag>  -f Dockerfile ../
 docker login <registry> --username <your user> --password <your password>
 docker push <registry>/<repository>:<tag>
 ```
 
 ### deploy 
+change deployment.yaml "<your image>" to real image
+
+change deployment.yaml "<your image pull secret>" to real secret
+
+configmap.yaml "SCRIPT_FILENAME" must be matched with Dockerfile "WORKDIR", this demo use directory "/project"
+
+note: k8s must install nginxingress, ingress resource need set annotations: kubernetes.io/ingress.class: <your nginxingress classname>
+It is necessary to add annotations in ingress resource: 
+nginx.ingress.kubernetes.io/backend-protocol: FCGI
+nginx.ingress.kubernetes.io/fastcgi-index: index.php
+nginx.ingress.kubernetes.io/fastcgi-params-configmap
+
 ```
 cd k8s
-change deployment.yaml "<your image>" to real image
 kubectl apply -f ./
 ```
 

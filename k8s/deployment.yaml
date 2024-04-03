@@ -70,7 +70,7 @@ spec:
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       imagePullSecrets:
-      - name: tcr
+      - name: <your image pull secret>
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
