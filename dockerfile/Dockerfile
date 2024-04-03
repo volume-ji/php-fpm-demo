@@ -1,0 +1,29 @@
+FROM php:8.0.3-fpm
+
+# install libs and tools
+RUN apt-get update -y && \
+    apt-get install -y zip git openssl zlib1g-dev libpng-dev libmcrypt-dev  libicu-dev
+
+# install php ext
+RUN docker-php-ext-install gd  intl pdo pdo_mysql mbstring
+
+RUN docker-php-ext-configure intl
+
+
+# install composer
+RUN curl -sS https://getcomposer.org/installer | \
+        php -- --install-dir=/usr/local/bin --filename=composer
+
+
+WORKDIR /project
+COPY ../public /project
+
+RUN echo '{\
+    "require": {\
+    "php": "^7.3|^8.0",\
+    "laravel/lumen-framework": "^8.0"\
+    }\
+ }' > composer.json
+
+RUN composer i
+

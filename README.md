@@ -1,1 +1,28 @@
 # php-fpm-demo
+It is a demo of php-fpm deployed on a tke cluster in nginxingress
+
+## Steps
+
+### build image and push registry
+
+```
+cd dockerfile
+docker build -t <registry>/<repository>:<tag> .
+docker login <registry> --username <your user> --password <your password>
+docker push <registry>/<repository>:<tag>
+```
+
+### deploy 
+```
+cd k8s
+change deployment.yaml "<your image>" to real image
+kubectl apply -f ./
+```
+
+## dockerfile
+* php-runtime-Dockerfile can build php runtime image
+* lumen-Dockerfile can build lumen framework depending on runtime image
+* Dockerfile is used to build demo project which include installing runtime, lumen and COPY demo project(../public/*) 
+
+## k8s
+including deployment, service, configmap, ingress resource deployd on k8s

@@ -1,0 +1,12 @@
+FROM php-runtime:8.0.3
+
+
+RUN echo '{\
+    "require": {\
+    "php": "^7.3|^8.0",\
+    "laravel/lumen-framework": "^8.0"\
+    }\
+ }' > composer.json
+
+RUN composer i
+

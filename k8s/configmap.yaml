@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  SCRIPT_FILENAME: /app/public/index.php
+kind: ConfigMap
+metadata:
+  name: fastcgi-params
+  namespace: default
